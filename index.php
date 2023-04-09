@@ -66,7 +66,7 @@ foreach($caps as $key=>$cap){
 	if(empty($link)){
 		$link=$cap;
 	}else{
-		$link='<a href="'.$link.'">'.$cap.'</a>';
+		$link='<a class="indice" href="'.$link.'">'.$cap.'</a>';
 	}
 	print '<li>'.$link.'</li>'.PHP_EOL;
 }
@@ -84,7 +84,7 @@ function abrirNoPalco(url){
 $(function(){
 	$('#palco').css('height',$(document).height()+'px');
 	abrirNoPalco("<?php print $links[0];?>");
-	$('a')
+	$('.indice')
 	   .click(function (event) {
 	       event.preventDefault();
 	       event.stopPropagation();
