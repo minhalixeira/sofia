@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="utf-8">
 <title>O Mundo de Sofia</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -13,16 +14,40 @@ iframe{
 	border:none;
 	margin-top:-8px;
 }
+table{
+	height:100%;
+	width:100%;
+}
+#container{
+	overflow-y: scroll;
+}
+#palco{
+	postion:absolute;
+	float:right;
+	height:100%;
+	width:66%;
+}
+#sumario{
+	position:absolute;
+	left:0;
+	top:0;
+	width:33%;
+}
+@media (max-width: 800px) {
+	#palco,#sumario{
+		position:relative;
+		width:100%;
+	}
+}
+
 </style>
 </head>
 <body>
-<table width="100%" height="100%">
-<tr>
-<td width="33%">
+<div id="sumario">
 <center>
 <h1>O Mundo de Sofia</h1>
 <h3>Sumário</h3>
-</centeR>
+</center>
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -45,17 +70,17 @@ foreach($caps as $key=>$cap){
 }
 print '</ol>'.PHP_EOL;
 ?>
-</td>
-<td>
-<iframe id="palco" src="about:blank" width="100%" height="100%"></iframe>
-</td>
-</tr>
-</table>
+</div><!--sumario-->
+<iframe id="palco" src="about:blank"></iframe>
 <script>
 function abrirNoPalco(url){
 	$("#palco").attr('src',url);
+	$('html, body').animate({
+		scrollTop: $("#palco").offset().top
+	}, 2000);
 }
 $(function(){
+	$('#palco').css('height',$(document).height()+'px');
 	abrirNoPalco("<?php print $links[0];?>");
 	$('a')
 	   .click(function (event) {
